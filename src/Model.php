@@ -34,20 +34,17 @@ abstract class Model extends \yii\base\Model
     }
 
 
-    public function beforeValidate()
+    public function afterValidate()
     {
-        $fail = 0;
-
-        if (!parent::beforeValidate()) {
-            $fail++;
-        }
-
         foreach ($this->getActiveModels() as $attr) {
             if (!$this->$attr->validate()) {
-                $fail++;
+                $this->addError(
+                    $attr,
+                    \Yii::t('app', 'Model does not validate')
+                );
             }
         }
 
-        return $fail === 0;
+        parent::afterValidate();
     }
 }
