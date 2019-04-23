@@ -43,7 +43,18 @@ How to
 	```
 
 
-3. Add input controls to your views as you normally would. Just
+3. Add validation rules for the models:
+    ```php
+    protected function rules()
+    {
+        return [
+            [$this->modelAttributes(), 'safe'];
+        ];
+    }
+    ```
+
+
+4. Add input controls to your views as you normally would. Just
    remember to reference model attributes of the form, instead of the
    form model itself.
 
@@ -59,7 +70,7 @@ How to
 	```
 
 
-4. Process the form as you normally do:
+5. Process the form as you normally do:
 
 	```php
 	$model = new MyForm([
