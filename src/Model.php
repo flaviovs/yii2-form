@@ -37,6 +37,18 @@ abstract class Model extends \yii\base\Model
     public function afterValidate()
     {
         foreach ($this->getActiveModels() as $attr) {
+            $model = $this->$attr;
+
+            if (!$model) {
+                \Yii::trace("Empty attribute \"$attr\"", __METHOD__);
+                continue;
+            }
+
+            if (!($model instanceof \yii\base\Model)) {
+                \Yii::trace("Value of \"$attr\" is not a model", __METHOD__);
+                continue;
+            }
+
             if (!$this->$attr->validate()) {
                 $this->addError(
                     $attr,
