@@ -10,7 +10,7 @@ abstract class Model extends \yii\base\Model
     {
         $active_models = $this->getActiveModels();
         if (
-            array_diff($active_models, $this->activeAttributes())
+            array_diff($this->activeAttributes(), $active_models)
             && !parent::load($data, $form)
         ) {
             return false;
