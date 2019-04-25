@@ -28,9 +28,10 @@ abstract class Model extends \yii\base\Model
 
     protected function getActiveModels()
     {
-        $models = $this->modelAttributes();
-        $active = $this->activeAttributes();
-        return array_intersect($models, $active);
+        return array_intersect(
+            $this->modelAttributes(),
+            $this->activeAttributes()
+        );
     }
 
 
