@@ -12,6 +12,7 @@ abstract class Model extends \yii\base\Model
         if (
             array_diff($this->activeAttributes(), $active_models)
             && !parent::load($data, $form)
+            && !$active_models
         ) {
             return false;
         }
